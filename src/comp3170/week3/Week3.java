@@ -22,6 +22,12 @@ import comp3170.Shader;
 
 public class Week3 extends JFrame implements GLEventListener {
 
+	// I find it easier to compute angles in radians using TAU instead of PI 
+	// TAU represents 1 full rotation (i.e. 360 degrees)
+	// https://www.youtube.com/watch?v=jG7vhMMXagQ
+
+	private final float TAU = (float)Math.PI * 2;
+	
 	private GLCanvas canvas;
 	private Shader shader;
 	
@@ -31,6 +37,9 @@ public class Week3 extends JFrame implements GLEventListener {
 
 	private float[] vertices;
 	private int vertexBuffer;
+
+	private float[] colours;
+	private int colourBuffer;
 
 	private InputManager input;
 
@@ -93,8 +102,20 @@ public class Week3 extends JFrame implements GLEventListener {
 		};
 		
 		// copy the data into a Vertex Buffer Object in graphics memory		
-	    this.vertexBuffer = this.shader.createBuffer(vertices);
+	    this.vertexBuffer = this.shader.createBuffer(this.vertices);
 
+		// vertices of a square as (x,y) pairs
+		this.colours = new float[] {
+				 1.0f,	0.0f, 0.0f,
+				 1.0f,	1.0f, 0.0f,
+				 0.0f,	1.0f, 0.0f,
+				 0.0f,	0.0f, 1.0f,
+		};
+		
+		// copy the data into a Vertex Buffer Object in graphics memory		
+	    this.colourBuffer = this.shader.createBuffer(this.colours);
+
+	    
 	}
 
 	@Override
@@ -113,20 +134,14 @@ public class Week3 extends JFrame implements GLEventListener {
 	public void display(GLAutoDrawable drawable) {
 		GL4 gl = (GL4) GLContext.getCurrentGL();
 
-        // clear the colour buffer
 		gl.glClear(GL_COLOR_BUFFER_BIT);		
 
-		// activate the shader
 		this.shader.enable();
 		
-        // connect the vertex buffer to the a_position attribute		   
 	    this.shader.setAttribute("a_position", vertexBuffer, 2, GL_FLOAT);
+	    this.shader.setAttribute("a_colour", colourBuffer, 3, GL_FLOAT);
+        this.shader.setUniform("u_angle", TAU/6);	
 
-	    // write the colour value into the u_colour uniform 
-	    float[] colour = {1.0f, 1.0f, 1.0f};
-	    
-        this.shader.setUniform("u_colour", colour);	
-	    
         // draw the shape as a series of lines in a loop
         gl.glDrawArrays(GL_LINE_LOOP, 0, vertices.length / 2);           	
         

@@ -1,7 +1,6 @@
-uniform vec3 u_colour;	/* colour as a 3D vector (r,g,b) */
+varying vec3 v_colour;
 
 void main() {
-	/* set the fragement (pixel) colour */
-    gl_FragColor = vec4(u_colour,1);
+    gl_FragColor = vec4(v_colour,1);
 }
 
