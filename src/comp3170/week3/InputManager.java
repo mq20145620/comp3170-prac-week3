@@ -13,6 +13,19 @@ public class InputManager implements KeyListener {
 		keysDown = new HashSet<Integer>();
 	}
 
+	/**
+	 * Test if the specified key is currently proessed.
+	 * Note: the input is a keycode value, as specified on the KeyEvent class.
+	 * https://docs.oracle.com/javase/7/docs/api/java/awt/event/KeyEvent.html
+	 * 
+	 * So, for instance, to test if the up arrow is pressed call:
+	 * 
+	 * 		input.isKeyDown(KeyEvent.VK_UP)
+	 * 
+	 * @param keyCode The integer keycode for the key 
+	 * @return true if the key is pressed
+	 */
+	
 	public boolean isKeyDown(int keyCode) {
 		return keysDown.contains(keyCode);
 	}
