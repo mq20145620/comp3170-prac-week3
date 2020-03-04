@@ -209,6 +209,15 @@ public class Shader {
 		case GL4.GL_FLOAT_VEC4:
 			expectedArgs = 4;
 			break;
+		case GL4.GL_FLOAT_MAT2:
+			expectedArgs = 4;
+			break;
+		case GL4.GL_FLOAT_MAT3:
+			expectedArgs = 9;
+			break;
+		case GL4.GL_FLOAT_MAT4:
+			expectedArgs = 16;
+			break;
 		}
 
 		if (value.length != expectedArgs) {
@@ -228,6 +237,15 @@ public class Shader {
 			break;
 		case GL4.GL_FLOAT_VEC4:
 			gl.glUniform4f(uniform, value[0], value[1], value[2], value[3]);
+			break;
+		case GL4.GL_FLOAT_MAT2:
+			gl.glUniformMatrix2fv(uniform, 1, false, value, 0);
+			break;
+		case GL4.GL_FLOAT_MAT3:
+			gl.glUniformMatrix3fv(uniform, 1, false, value, 0);
+			break;
+		case GL4.GL_FLOAT_MAT4:
+			gl.glUniformMatrix4fv(uniform, 1, false, value, 0);
 			break;
 		}
 

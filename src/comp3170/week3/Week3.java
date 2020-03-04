@@ -140,7 +140,7 @@ public class Week3 extends JFrame implements GLEventListener {
 		
 	    this.shader.setAttribute("a_position", vertexBuffer, 2, GL_FLOAT);
 	    this.shader.setAttribute("a_colour", colourBuffer, 3, GL_FLOAT);
-        this.shader.setUniform("u_angle", TAU/6);	
+        this.shader.setUniform("u_angle", TAU/8);	
 
         // draw the shape as a series of lines in a loop
         gl.glDrawArrays(GL_LINE_LOOP, 0, vertices.length / 2);           	
