@@ -1,9 +1,10 @@
+#version 410
 
-attribute vec2 a_position;	/* vertex position */
-attribute vec3 a_colour;	/* vertex colour */
+in vec2 a_position;	/* vertex position */
+in vec3 a_colour;	/* vertex colour */
 uniform float u_angle; /* angle to rotate (in radians) */
 
-varying vec3 v_colour;
+out vec3 v_colour;
 
 void main() {
 
